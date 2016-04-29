@@ -1,0 +1,224 @@
+[
+  {
+    "endpoint": "overview"
+  },
+  {
+    "endpoint": "cluster-name",
+    "json-args": ["name"]
+  },
+  {
+    "endpoint": "nodes"
+  },
+  {
+    "name": "node",
+    "endpoint": "nodes/{node}"
+  },
+  {
+    "endpoint": "extensions"
+  },
+  {
+    "endpoint": "connections"
+  },
+  {
+    "name": "connection",
+    "endpoint": "connections/{connection}",
+    "methods": ["GET", "DELETE"]
+  },
+  {
+    "name": "connection-channels",
+    "endpoint": "connections/{connection}/channels"
+  },
+  {
+    "endpoint": "channels"
+  },
+  {
+    "name": "channel",
+    "endpoint": "channels/{channel}"
+  },
+  {
+    "name": "all_exchanges",
+    "endpoint": "exchanges"
+  },
+  {
+    "name": "exchanges",
+    "endpoint": "exchanges/{vhost}",
+    "defaults": {"vhost": "/"}
+  },
+  {
+    "name": "exchange",
+    "endpoint": "exchanges/{vhost}/{exchange}",
+    "json-args": ["type"],
+    "json-options": ["auto_delete", "durable", "internal", "arguments"],
+    "defaults": {"type": "direct"}
+  },
+  {
+    "name": "exchange",
+    "endpoint": "exchanges/{vhost}/{exchange}/publish",
+    "methods": ["POST"],
+    "json-args": ["properties", "routing_key", "payload", "payload_encoding"]
+  },
+  {
+    "name": "binding-from-source-exchange",
+    "endpoint": "exchanges/{vhost}/{exchange}/bindings/source"
+  },
+  {
+    "name": "binding-from-destination-exchange",
+    "endpoint": "exchanges/{vhost}/{exchange}/bindings/destination"
+  },
+  {
+    "name": "binding-from-destination-exchange",
+    "endpoint": "exchanges/{vhost}/{exchange}/bindings/destination"
+  },
+  {
+    "name": "all-queues",
+    "endpoint": "queues"
+  },
+  {
+    "name": "queues",
+    "endpoint": "queues/{vhost}",
+    "defaults": {"vhost": "/"}
+  },
+  {
+    "name": "queue",
+    "endpoint": "queues/{vhost}/{queue}",
+    "json-options": ["auto_delete", "durable", "arguments", "node"]
+  },
+  {
+    "name": "queue-bindings",
+    "endpoint": "queues/{vhost}/{queue}/bindings"
+  },
+  {
+    "name": "queue-contents",
+    "endpoint": "queues/{vhost}/{queue}/contents",
+    "methods": ["DELETE"]
+  },
+  {
+    "name": "queue-action",
+    "endpoint": "queues/{vhost}/{queue}/actions",
+    "methods": ["POST"],
+    "json-args": ["action"],
+    "defaults": {"action": "sync"}
+  },
+  {
+    "name": "queue-get",
+    "endpoint": "queues/{vhost}/{queue}/get",
+    "methods": ["POST"],
+    "json-args": ["count", "requeue", "encoding"],
+    "json-options": ["truncate"],
+    "defaults": {"count": 1, "requeue": true, "encoding": "auto"}
+  },
+  {
+    "name": "all-bindings",
+    "endpoint": "bindings"
+  },
+  {
+    "name": "bindings",
+    "endpoint": "bindings/{vhost}",
+    "defaults": {"vhost": "/"}
+  },
+  {
+    "name": "bindings-by-queue",
+    "endpoint": "bindings/{vhost}/e/{exchange}/q/{queue}",
+    "methods": ["GET", "POST"],
+    "json-options": ["routing_key", "arguments"]
+  },
+  {
+    "name": "binding-by-queue",
+    "endpoint": "bindings/{vhost}/e/{exchange}/q/{queue}/{props}",
+    "methods": ["GET", "DELETE"]
+  },
+  {
+    "name": "bindings-between-exchanges",
+    "endpoint": "bindings/{vhost}/e/{source}/e/{destination}",
+    "methods": ["GET", "POST"],
+    "json-options": ["routing_key", "arguments"]
+  },
+  {
+    "name": "binding-between-exchanges",
+    "endpoint": "bindings/{vhost}/e/{source}/e/{destination}/{props}",
+    "methods": ["GET", "DELETE"]
+  },
+  {
+    "endpoint": "vhosts"
+  },
+  {
+    "name": "vhost",
+    "endpoint": "vhosts/{vhost}",
+    "defaults": {"vhost": "/"},
+    "json-options": ["tracing"]
+  },
+  {
+    "name": "vhost",
+    "endpoint": "vhosts/{vhost}",
+    "json-options": ["tracing"]
+  },
+  {
+    "name": "vhost-permissions",
+    "endpoint": "vhosts/{vhost}/permissions",
+    "defaults": {"vhost": "/"}
+  },
+  {
+    "endpoint": "users"
+  },
+  {
+    "name": "user",
+    "endpoint": "users/{user}",
+    "json-args": ["tags"],
+    "json-options": ["password", "password_hash"],
+    "defaults": {"tags": ""}
+  },
+  {
+    "name": "user-permissions",
+    "endpoint": "users/{user}/permissions"
+  },
+  {
+    "endpoint": "whoami"
+  },
+  {
+    "name": "all-permissions",
+    "endpoint": "permissions"
+  },
+  {
+    "name": "user-vhost-permissions",
+    "endpoint": "permissions/{vhost}/{user}",
+    "json-args": ["configure", "write", "read"]
+  },
+  {
+    "name": "all-parameters",
+    "endpoint": "parameters"
+  },
+  {
+    "name": "component-parameters",
+    "endpoint": "parameters/{component}"
+  },
+  {
+    "name": "vhost-component-parameters",
+    "endpoint": "parameters/{component}/{vhost}",
+    "defaults": {"vhost": "/"}
+  },
+  {
+    "name": "parameter",
+    "endpoint": "parameters/{component}/{vhost}/{parameter}",
+    "json-args": ["vhost", "component", "name", "value"]
+  },
+  {
+    "name": "all-policies",
+    "endpoint": "policies"
+  },
+  {
+    "name": "policies",
+    "endpoint": "policies/{vhost}",
+    "defaults": {"vhost": "/"}
+  },
+  {
+    "name": "policy",
+    "endpoint": "policies/{vhost}/{policy}",
+    "json-args": ["pattern", "definition"],
+    "json-options": ["priority", "apply-to"]
+  },
+  {
+    "name": "aliveness-test",
+    "endpoint": "aliveness-test/{vhost}",
+    "defaults": {"vhost": "/"}
+  }
+]
