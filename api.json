@@ -1,224 +1,301 @@
 [
-  {
-    "endpoint": "overview"
-  },
-  {
-    "endpoint": "cluster-name",
-    "json-args": ["name"]
-  },
-  {
-    "endpoint": "nodes"
-  },
-  {
-    "name": "node",
-    "endpoint": "nodes/{node}"
-  },
-  {
-    "endpoint": "extensions"
-  },
-  {
-    "endpoint": "connections"
-  },
-  {
-    "name": "connection",
-    "endpoint": "connections/{connection}",
-    "methods": ["GET", "DELETE"]
-  },
-  {
-    "name": "connection-channels",
-    "endpoint": "connections/{connection}/channels"
-  },
-  {
-    "endpoint": "channels"
-  },
-  {
-    "name": "channel",
-    "endpoint": "channels/{channel}"
-  },
-  {
-    "name": "all_exchanges",
-    "endpoint": "exchanges"
-  },
-  {
-    "name": "exchanges",
-    "endpoint": "exchanges/{vhost}",
-    "defaults": {"vhost": "/"}
-  },
-  {
-    "name": "exchange",
-    "endpoint": "exchanges/{vhost}/{exchange}",
-    "json-args": ["type"],
-    "json-options": ["auto_delete", "durable", "internal", "arguments"],
-    "defaults": {"type": "direct"}
-  },
-  {
-    "name": "exchange",
-    "endpoint": "exchanges/{vhost}/{exchange}/publish",
-    "methods": ["POST"],
-    "json-args": ["properties", "routing_key", "payload", "payload_encoding"]
-  },
-  {
-    "name": "binding-from-source-exchange",
-    "endpoint": "exchanges/{vhost}/{exchange}/bindings/source"
-  },
-  {
-    "name": "binding-from-destination-exchange",
-    "endpoint": "exchanges/{vhost}/{exchange}/bindings/destination"
-  },
-  {
-    "name": "binding-from-destination-exchange",
-    "endpoint": "exchanges/{vhost}/{exchange}/bindings/destination"
-  },
-  {
-    "name": "all-queues",
-    "endpoint": "queues"
-  },
-  {
-    "name": "queues",
-    "endpoint": "queues/{vhost}",
-    "defaults": {"vhost": "/"}
-  },
-  {
-    "name": "queue",
-    "endpoint": "queues/{vhost}/{queue}",
-    "json-options": ["auto_delete", "durable", "arguments", "node"]
-  },
-  {
-    "name": "queue-bindings",
-    "endpoint": "queues/{vhost}/{queue}/bindings"
-  },
-  {
-    "name": "queue-contents",
-    "endpoint": "queues/{vhost}/{queue}/contents",
-    "methods": ["DELETE"]
-  },
-  {
-    "name": "queue-action",
-    "endpoint": "queues/{vhost}/{queue}/actions",
-    "methods": ["POST"],
-    "json-args": ["action"],
-    "defaults": {"action": "sync"}
-  },
-  {
-    "name": "queue-get",
-    "endpoint": "queues/{vhost}/{queue}/get",
-    "methods": ["POST"],
-    "json-args": ["count", "requeue", "encoding"],
-    "json-options": ["truncate"],
-    "defaults": {"count": 1, "requeue": true, "encoding": "auto"}
-  },
-  {
-    "name": "all-bindings",
-    "endpoint": "bindings"
-  },
-  {
-    "name": "bindings",
-    "endpoint": "bindings/{vhost}",
-    "defaults": {"vhost": "/"}
-  },
-  {
-    "name": "bindings-by-queue",
-    "endpoint": "bindings/{vhost}/e/{exchange}/q/{queue}",
-    "methods": ["GET", "POST"],
-    "json-options": ["routing_key", "arguments"]
-  },
-  {
-    "name": "binding-by-queue",
-    "endpoint": "bindings/{vhost}/e/{exchange}/q/{queue}/{props}",
-    "methods": ["GET", "DELETE"]
-  },
-  {
-    "name": "bindings-between-exchanges",
-    "endpoint": "bindings/{vhost}/e/{source}/e/{destination}",
-    "methods": ["GET", "POST"],
-    "json-options": ["routing_key", "arguments"]
-  },
-  {
-    "name": "binding-between-exchanges",
-    "endpoint": "bindings/{vhost}/e/{source}/e/{destination}/{props}",
-    "methods": ["GET", "DELETE"]
-  },
-  {
-    "endpoint": "vhosts"
-  },
-  {
-    "name": "vhost",
-    "endpoint": "vhosts/{vhost}",
-    "defaults": {"vhost": "/"},
-    "json-options": ["tracing"]
-  },
-  {
-    "name": "vhost",
-    "endpoint": "vhosts/{vhost}",
-    "json-options": ["tracing"]
-  },
-  {
-    "name": "vhost-permissions",
-    "endpoint": "vhosts/{vhost}/permissions",
-    "defaults": {"vhost": "/"}
-  },
-  {
-    "endpoint": "users"
-  },
-  {
-    "name": "user",
-    "endpoint": "users/{user}",
-    "json-args": ["tags"],
-    "json-options": ["password", "password_hash"],
-    "defaults": {"tags": ""}
-  },
-  {
-    "name": "user-permissions",
-    "endpoint": "users/{user}/permissions"
-  },
-  {
-    "endpoint": "whoami"
-  },
-  {
-    "name": "all-permissions",
-    "endpoint": "permissions"
-  },
-  {
-    "name": "user-vhost-permissions",
-    "endpoint": "permissions/{vhost}/{user}",
-    "json-args": ["configure", "write", "read"]
-  },
-  {
-    "name": "all-parameters",
-    "endpoint": "parameters"
-  },
-  {
-    "name": "component-parameters",
-    "endpoint": "parameters/{component}"
-  },
-  {
-    "name": "vhost-component-parameters",
-    "endpoint": "parameters/{component}/{vhost}",
-    "defaults": {"vhost": "/"}
-  },
-  {
-    "name": "parameter",
-    "endpoint": "parameters/{component}/{vhost}/{parameter}",
-    "json-args": ["vhost", "component", "name", "value"]
-  },
-  {
-    "name": "all-policies",
-    "endpoint": "policies"
-  },
-  {
-    "name": "policies",
-    "endpoint": "policies/{vhost}",
-    "defaults": {"vhost": "/"}
-  },
-  {
-    "name": "policy",
-    "endpoint": "policies/{vhost}/{policy}",
-    "json-args": ["pattern", "definition"],
-    "json-options": ["priority", "apply-to"]
-  },
-  {
-    "name": "aliveness-test",
-    "endpoint": "aliveness-test/{vhost}",
-    "defaults": {"vhost": "/"}
-  }
+	{
+		"description": "Various random bits of information that describe the whole system",
+		"endpoint": "overview"
+	},
+	{
+		"description": "Name identifying this RabbitMQ cluster",
+		"endpoint": "cluster-name",
+		"data-args": ["name"]
+	},
+	{
+		"description": "A list of nodes in the RabbitMQ cluster",
+		"endpoint": "nodes"
+	},
+	{
+		"description": "An individual node in the RabbitMQ cluster",
+		"name": "node",
+		"endpoint": "nodes/{node}"
+	},
+	{
+		"description": "A list of extensions to the management plugin",
+		"endpoint": "extensions"
+	},
+	{
+		"description": "A list of all open connections",
+		"endpoint": "connections"
+	},
+	{
+		"description": "A list of all open connections in a specific vhost",
+		"name": "vhost-connections",
+		"endpoint": "vhosts/{vhost}/connections"
+	},
+	{
+		"description": "An individual connection. DELETEing it will close the connection",
+		"name": "connection",
+		"endpoint": "connections/{connection}",
+		"methods": ["GET", "DELETE"]
+	},
+	{
+		"description": "List of all channels for a given connection",
+		"name": "connection-channels",
+		"endpoint": "connections/{connection}/channels"
+	},
+	{
+		"description": "A list of all open channels",
+		"endpoint": "channels"
+	},
+	{
+		"description": "A list of all open channels in a specific vhost",
+		"name": "vhost-channels",
+		"endpoint": "vhosts/{vhost}/channels"
+	},
+	{
+		"description": "Details about an individual channel",
+		"name": "channel",
+		"endpoint": "channels/{channel}"
+	},
+	{
+		"description": "A list of all consumers",
+		"name": "all_consumers",
+		"endpoint": "consumers"
+	},
+	{
+		"description": "A list of all consumers in a given virtual host",
+		"name": "vhost-consumers",
+		"endpoint": "vhosts/{vhost}/consumers"
+	},
+	{
+		"description": "A list of all exchanges",
+		"name": "all_exchanges",
+		"endpoint": "exchanges"
+	},
+	{
+		"description": "A list of all exchanges in a given virtual host",
+		"name": "exchanges",
+		"endpoint": "exchanges/{vhost}",
+		"defaults": {"vhost": "/"}
+	},
+	{
+		"description": "An individual exchange",
+		"name": "exchange",
+		"endpoint": "exchanges/{vhost}/{exchange}",
+    "methods": ["GET", "PUT"],
+		"data-args": ["type"],
+		"data-options": ["auto_delete", "durable", "internal", "arguments"],
+		"defaults": {"type": "direct"}
+	},
+	{
+		"description": "An individual exchange",
+		"name": "exchange",
+		"endpoint": "exchanges/{vhost}/{exchange}",
+    "methods": ["DELETE"],
+		"data-args": ["type"],
+		"data-options": ["auto_delete", "durable", "internal", "arguments"],
+    "query-options": ["if-unused"],
+		"defaults": {"type": "direct"}
+	},
+	{
+		"description": "Publish a message to a given exchange",
+		"name": "exchange",
+		"endpoint": "exchanges/{vhost}/{exchange}/publish",
+		"methods": ["POST"],
+		"data-args": ["properties", "routing_key", "payload", "payload_encoding"]
+	},
+	{
+		"description": "A list of all bindings in which a given exchange is the source",
+		"name": "binding-from-source-exchange",
+		"endpoint": "exchanges/{vhost}/{exchange}/bindings/source"
+	},
+	{
+		"description": "A list of all bindings in which a given exchange is the destination",
+		"name": "binding-from-destination-exchange",
+		"endpoint": "exchanges/{vhost}/{exchange}/bindings/destination"
+	},
+	{
+		"description": "A list of all queues",
+		"name": "all-queues",
+		"endpoint": "queues"
+	},
+	{
+		"description": "A list of all queues in a given virtual host",
+		"name": "queues",
+		"endpoint": "queues/{vhost}",
+		"defaults": {"vhost": "/"}
+	},
+	{
+		"description": "An individual queue",
+		"name": "queue",
+		"endpoint": "queues/{vhost}/{queue}",
+    "methods": ["GET", "PUT"],
+		"data-options": ["auto_delete", "durable", "arguments", "node"]
+	},
+	{
+		"description": "An individual queue",
+		"name": "queue",
+		"endpoint": "queues/{vhost}/{queue}",
+    "methods": ["DELETE"],
+		"data-options": ["auto_delete", "durable", "arguments", "node"],
+    "query-options": ["if-empty", "if-unused"]
+	},
+	{
+		"description": "A list of all bindings on a given queue",
+		"name": "queue-bindings",
+		"endpoint": "queues/{vhost}/{queue}/bindings"
+	},
+	{
+		"description": "Contents of a queue. DELETE to purge. Note you can't GET this",
+		"name": "queue-contents",
+		"endpoint": "queues/{vhost}/{queue}/contents",
+		"methods": ["DELETE"]
+	},
+	{
+		"description": "Actions that can be taken on a queue",
+		"name": "queue-action",
+		"endpoint": "queues/{vhost}/{queue}/actions",
+		"methods": ["POST"],
+		"data-args": ["action"],
+		"defaults": {"action": "sync"}
+	},
+	{
+		"description": "Get messages from a queue",
+		"name": "queue-get",
+		"endpoint": "queues/{vhost}/{queue}/get",
+		"methods": ["POST"],
+		"data-args": ["count", "requeue", "encoding"],
+		"data-options": ["truncate"],
+		"defaults": {"count": 1, "requeue": true, "encoding": "auto"}
+	},
+	{
+		"description": "A list of all bindings",
+		"name": "all-bindings",
+		"endpoint": "bindings"
+	},
+	{
+		"description": "A list of all bindings in a given virtual host",
+		"name": "bindings",
+		"endpoint": "bindings/{vhost}",
+		"defaults": {"vhost": "/"}
+	},
+	{
+		"description": "A list of all bindings between an exchange and a queue",
+		"name": "bindings-by-queue",
+		"endpoint": "bindings/{vhost}/e/{exchange}/q/{queue}",
+		"methods": ["GET", "POST"],
+		"data-options": ["routing_key", "arguments"]
+	},
+	{
+		"description": "An individual binding between an exchange and a queue",
+		"name": "binding-by-queue",
+		"endpoint": "bindings/{vhost}/e/{exchange}/q/{queue}/{props}",
+		"methods": ["GET", "DELETE"]
+	},
+	{
+		"description": "A list of all bindings between two exchanges",
+		"name": "bindings-between-exchanges",
+		"endpoint": "bindings/{vhost}/e/{source}/e/{destination}",
+		"methods": ["GET", "POST"],
+		"data-options": ["routing_key", "arguments"]
+	},
+	{
+		"description": "An individual binding between two exchanges",
+		"name": "binding-between-exchanges",
+		"endpoint": "bindings/{vhost}/e/{source}/e/{destination}/{props}",
+		"methods": ["GET", "DELETE"]
+	},
+	{
+		"description": "A list of all vhosts",
+		"endpoint": "vhosts"
+	},
+	{
+		"description": "An individual virtual host",
+		"name": "vhost",
+		"endpoint": "vhosts/{vhost}",
+		"defaults": {"vhost": "/"},
+		"data-options": ["tracing"]
+	},
+	{
+		"description": "A list of all permissions for a given virtual host",
+		"name": "vhost-permissions",
+		"endpoint": "vhosts/{vhost}/permissions",
+		"defaults": {"vhost": "/"}
+	},
+	{
+		"description": "A list of all users",
+		"endpoint": "users"
+	},
+	{
+		"description": "An individual user",
+		"name": "user",
+		"endpoint": "users/{user}",
+		"data-args": ["tags"],
+		"data-options": ["password", "password_hash"],
+		"defaults": {"tags": ""}
+	},
+	{
+		"description": "A list of all permissions for a given user",
+		"name": "user-permissions",
+		"endpoint": "users/{user}/permissions"
+	},
+	{
+		"description": "Details of the currently authenticated user",
+		"endpoint": "whoami"
+	},
+	{
+		"description": "A list of all permissions for all users",
+		"name": "all-permissions",
+		"endpoint": "permissions"
+	},
+	{
+		"description": "An individual permission of a user and virtual host",
+		"name": "user-vhost-permissions",
+		"endpoint": "permissions/{vhost}/{user}",
+		"data-args": ["configure", "write", "read"]
+	},
+	{
+		"description": "A list of all parameters",
+		"name": "all-parameters",
+		"endpoint": "parameters"
+	},
+	{
+		"description": "A list of all parameters for a given component",
+		"name": "component-parameters",
+		"endpoint": "parameters/{component}"
+	},
+	{
+		"description": "A list of all parameters for a given component and virtual host",
+		"name": "vhost-component-parameters",
+		"endpoint": "parameters/{component}/{vhost}",
+		"defaults": {"vhost": "/"}
+	},
+	{
+		"description": "An individual parameter",
+		"name": "parameter",
+		"endpoint": "parameters/{component}/{vhost}/{parameter}",
+		"data-args": ["vhost", "component", "name", "value"]
+	},
+	{
+		"description": "A list of all policies",
+		"name": "all-policies",
+		"endpoint": "policies"
+	},
+	{
+		"description": "A list of all policies in a given virtual host",
+		"name": "policies",
+		"endpoint": "policies/{vhost}",
+		"defaults": {"vhost": "/"}
+	},
+	{
+		"description": "An individual policy",
+		"name": "policy",
+		"endpoint": "policies/{vhost}/{policy}",
+		"data-args": ["pattern", "definition"],
+		"data-options": ["priority", "apply-to"]
+	},
+	{
+		"description": "Declares a test queue, then publishes and consumes a message",
+		"name": "aliveness-test",
+		"endpoint": "aliveness-test/{vhost}",
+		"defaults": {"vhost": "/"}
+	}
 ]
