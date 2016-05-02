@@ -300,13 +300,6 @@ class Client(object):
         _api_endpoint = "api/bindings/{vhost}{querystring}".format(querystring=_query_string, vhost=self.urlquote(vhost))
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def get_bindings_by_queue(self, vhost, exchange, queue):
-        '''A list of all bindings between an exchange and a queue'''
-
-        _query_string = ""
-        _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}{querystring}".format(querystring=_query_string, vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue))
-        return self.connection.GET(endpoint=_api_endpoint)
-
     def post_bindings_by_queue(self, vhost, exchange, queue, routing_key = _NO_VALUE, arguments = _NO_VALUE):
         '''A list of all bindings between an exchange and a queue'''
 
@@ -315,6 +308,13 @@ class Client(object):
         _all_data_args = {'routing_key': routing_key, 'arguments': arguments}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
+
+    def get_bindings_by_queue(self, vhost, exchange, queue):
+        '''A list of all bindings between an exchange and a queue'''
+
+        _query_string = ""
+        _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}{querystring}".format(querystring=_query_string, vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue))
+        return self.connection.GET(endpoint=_api_endpoint)
 
     def delete_binding_by_queue(self, vhost, exchange, queue, props):
         '''An individual binding between an exchange and a queue'''
@@ -330,13 +330,6 @@ class Client(object):
         _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}/{props}{querystring}".format(querystring=_query_string, vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue), props=self.urlquote(props))
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def get_bindings_between_exchanges(self, vhost, source, destination):
-        '''A list of all bindings between two exchanges'''
-
-        _query_string = ""
-        _api_endpoint = "api/bindings/{vhost}/e/{source}/e/{destination}{querystring}".format(querystring=_query_string, vhost=self.urlquote(vhost), source=self.urlquote(source), destination=self.urlquote(destination))
-        return self.connection.GET(endpoint=_api_endpoint)
-
     def post_bindings_between_exchanges(self, vhost, source, destination, routing_key = _NO_VALUE, arguments = _NO_VALUE):
         '''A list of all bindings between two exchanges'''
 
@@ -345,6 +338,13 @@ class Client(object):
         _all_data_args = {'routing_key': routing_key, 'arguments': arguments}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
+
+    def get_bindings_between_exchanges(self, vhost, source, destination):
+        '''A list of all bindings between two exchanges'''
+
+        _query_string = ""
+        _api_endpoint = "api/bindings/{vhost}/e/{source}/e/{destination}{querystring}".format(querystring=_query_string, vhost=self.urlquote(vhost), source=self.urlquote(source), destination=self.urlquote(destination))
+        return self.connection.GET(endpoint=_api_endpoint)
 
     def delete_binding_between_exchanges(self, vhost, source, destination, props):
         '''An individual binding between two exchanges'''
