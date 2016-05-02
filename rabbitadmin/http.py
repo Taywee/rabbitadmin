@@ -43,17 +43,17 @@ class HTTP(object):
         pass
 
     def GET(self, endpoint):
-        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), method='GET')
+        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), method='GET', headers={'Content-Type': 'application/json'})
         return makerequest(self.opener, request)
 
     def DELETE(self, endpoint):
-        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), method='DELETE')
+        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), method='DELETE', headers={'Content-Type': 'application/json'})
         return makerequest(self.opener, request)
 
     def PUT(self, endpoint, data):
-        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), data=bytes(json.dumps(data), 'utf-8'), method='PUT')
+        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), data=bytes(json.dumps(data), 'utf-8'), method='PUT', headers={'Content-Type': 'application/json'})
         return makerequest(self.opener, request)
 
     def POST(self, endpoint, data):
-        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), data=bytes(json.dumps(data), 'utf-8'), method='POST')
+        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), data=bytes(json.dumps(data), 'utf-8'), method='POST', headers={'Content-Type': 'application/json'})
         return makerequest(self.opener, request)
