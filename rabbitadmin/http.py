@@ -26,7 +26,7 @@ class HTTP(object):
 
     def __init__(self, scheme, host, port, username, password):
         self.scheme = scheme
-        self.host = ':'.join((host, port))
+        self.host = ':'.join((host, str(port)))
 
         auth = HTTPBasicAuthHandler(HTTPPasswordMgrWithDefaultRealm())
         auth.add_password(
