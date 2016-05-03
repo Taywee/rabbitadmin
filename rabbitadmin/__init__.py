@@ -95,14 +95,6 @@ class Client(object):
         
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def get_connection(self, connection):
-        '''An individual connection. DELETEing it will close the connection'''
-        
-
-        _api_endpoint = "api/connections/{connection}".format(connection=self.urlquote(connection), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
     def delete_connection(self, connection):
         '''An individual connection. DELETEing it will close the connection'''
         
@@ -110,6 +102,14 @@ class Client(object):
         _api_endpoint = "api/connections/{connection}".format(connection=self.urlquote(connection), )
         
         return self.connection.DELETE(endpoint=_api_endpoint)
+
+    def get_connection(self, connection):
+        '''An individual connection. DELETEing it will close the connection'''
+        
+
+        _api_endpoint = "api/connections/{connection}".format(connection=self.urlquote(connection), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
 
     def get_connection_channels(self, connection):
         '''List of all channels for a given connection'''
@@ -359,14 +359,6 @@ class Client(object):
         
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
 
-    def get_binding_by_queue(self, vhost, exchange, queue, props):
-        '''An individual binding between an exchange and a queue'''
-        
-
-        _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}/{props}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue), props=self.urlquote(props), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
     def delete_binding_by_queue(self, vhost, exchange, queue, props):
         '''An individual binding between an exchange and a queue'''
         
@@ -374,6 +366,14 @@ class Client(object):
         _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}/{props}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue), props=self.urlquote(props), )
         
         return self.connection.DELETE(endpoint=_api_endpoint)
+
+    def get_binding_by_queue(self, vhost, exchange, queue, props):
+        '''An individual binding between an exchange and a queue'''
+        
+
+        _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}/{props}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue), props=self.urlquote(props), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
 
     def get_bindings_between_exchanges(self, vhost, source, destination):
         '''A list of all bindings between two exchanges'''
@@ -394,14 +394,6 @@ class Client(object):
         
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
 
-    def get_binding_between_exchanges(self, vhost, source, destination, props):
-        '''An individual binding between two exchanges'''
-        
-
-        _api_endpoint = "api/bindings/{vhost}/e/{source}/e/{destination}/{props}".format(vhost=self.urlquote(vhost), source=self.urlquote(source), destination=self.urlquote(destination), props=self.urlquote(props), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
     def delete_binding_between_exchanges(self, vhost, source, destination, props):
         '''An individual binding between two exchanges'''
         
@@ -410,11 +402,35 @@ class Client(object):
         
         return self.connection.DELETE(endpoint=_api_endpoint)
 
+    def get_binding_between_exchanges(self, vhost, source, destination, props):
+        '''An individual binding between two exchanges'''
+        
+
+        _api_endpoint = "api/bindings/{vhost}/e/{source}/e/{destination}/{props}".format(vhost=self.urlquote(vhost), source=self.urlquote(source), destination=self.urlquote(destination), props=self.urlquote(props), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def get_vhosts(self):
         '''A list of all vhosts'''
         
 
         _api_endpoint = "api/vhosts"
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
+    def delete_vhost(self, vhost = '/'):
+        '''An individual virtual host'''
+        
+
+        _api_endpoint = "api/vhosts/{vhost}".format(vhost=self.urlquote(vhost), )
+        
+        return self.connection.DELETE(endpoint=_api_endpoint)
+
+    def get_vhost(self, vhost = '/'):
+        '''An individual virtual host'''
+        
+
+        _api_endpoint = "api/vhosts/{vhost}".format(vhost=self.urlquote(vhost), )
         
         return self.connection.GET(endpoint=_api_endpoint)
 
@@ -428,22 +444,6 @@ class Client(object):
         _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
-
-    def get_vhost(self, vhost = '/'):
-        '''An individual virtual host'''
-        
-
-        _api_endpoint = "api/vhosts/{vhost}".format(vhost=self.urlquote(vhost), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
-    def delete_vhost(self, vhost = '/'):
-        '''An individual virtual host'''
-        
-
-        _api_endpoint = "api/vhosts/{vhost}".format(vhost=self.urlquote(vhost), )
-        
-        return self.connection.DELETE(endpoint=_api_endpoint)
 
     def get_vhost_permissions(self, vhost = '/'):
         '''A list of all permissions for a given virtual host'''
@@ -461,6 +461,22 @@ class Client(object):
         
         return self.connection.GET(endpoint=_api_endpoint)
 
+    def delete_user(self, user):
+        '''An individual user'''
+        
+
+        _api_endpoint = "api/users/{user}".format(user=self.urlquote(user), )
+        
+        return self.connection.DELETE(endpoint=_api_endpoint)
+
+    def get_user(self, user):
+        '''An individual user'''
+        
+
+        _api_endpoint = "api/users/{user}".format(user=self.urlquote(user), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def put_user(self, user, tags = ''):
         '''An individual user'''
         
@@ -471,22 +487,6 @@ class Client(object):
         _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
-
-    def get_user(self, user):
-        '''An individual user'''
-        
-
-        _api_endpoint = "api/users/{user}".format(user=self.urlquote(user), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
-    def delete_user(self, user):
-        '''An individual user'''
-        
-
-        _api_endpoint = "api/users/{user}".format(user=self.urlquote(user), )
-        
-        return self.connection.DELETE(endpoint=_api_endpoint)
 
     def get_user_permissions(self, user):
         '''A list of all permissions for a given user'''
@@ -512,6 +512,22 @@ class Client(object):
         
         return self.connection.GET(endpoint=_api_endpoint)
 
+    def delete_user_vhost_permissions(self, vhost, user):
+        '''An individual permission of a user and virtual host'''
+        
+
+        _api_endpoint = "api/permissions/{vhost}/{user}".format(vhost=self.urlquote(vhost), user=self.urlquote(user), )
+        
+        return self.connection.DELETE(endpoint=_api_endpoint)
+
+    def get_user_vhost_permissions(self, vhost, user):
+        '''An individual permission of a user and virtual host'''
+        
+
+        _api_endpoint = "api/permissions/{vhost}/{user}".format(vhost=self.urlquote(vhost), user=self.urlquote(user), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def put_user_vhost_permissions(self, vhost, user, configure, write, read):
         '''An individual permission of a user and virtual host'''
         
@@ -522,22 +538,6 @@ class Client(object):
         _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
-
-    def get_user_vhost_permissions(self, vhost, user):
-        '''An individual permission of a user and virtual host'''
-        
-
-        _api_endpoint = "api/permissions/{vhost}/{user}".format(vhost=self.urlquote(vhost), user=self.urlquote(user), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
-    def delete_user_vhost_permissions(self, vhost, user):
-        '''An individual permission of a user and virtual host'''
-        
-
-        _api_endpoint = "api/permissions/{vhost}/{user}".format(vhost=self.urlquote(vhost), user=self.urlquote(user), )
-        
-        return self.connection.DELETE(endpoint=_api_endpoint)
 
     def get_all_parameters(self):
         '''A list of all parameters'''
@@ -563,6 +563,22 @@ class Client(object):
         
         return self.connection.GET(endpoint=_api_endpoint)
 
+    def delete_parameter(self, component, vhost, parameter):
+        '''An individual parameter'''
+        
+
+        _api_endpoint = "api/parameters/{component}/{vhost}/{parameter}".format(component=self.urlquote(component), vhost=self.urlquote(vhost), parameter=self.urlquote(parameter), )
+        
+        return self.connection.DELETE(endpoint=_api_endpoint)
+
+    def get_parameter(self, component, vhost, parameter):
+        '''An individual parameter'''
+        
+
+        _api_endpoint = "api/parameters/{component}/{vhost}/{parameter}".format(component=self.urlquote(component), vhost=self.urlquote(vhost), parameter=self.urlquote(parameter), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def put_parameter(self, component, vhost, parameter, name, value):
         '''An individual parameter'''
         
@@ -573,22 +589,6 @@ class Client(object):
         _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
-
-    def get_parameter(self, component, vhost, parameter):
-        '''An individual parameter'''
-        
-
-        _api_endpoint = "api/parameters/{component}/{vhost}/{parameter}".format(component=self.urlquote(component), vhost=self.urlquote(vhost), parameter=self.urlquote(parameter), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
-    def delete_parameter(self, component, vhost, parameter):
-        '''An individual parameter'''
-        
-
-        _api_endpoint = "api/parameters/{component}/{vhost}/{parameter}".format(component=self.urlquote(component), vhost=self.urlquote(vhost), parameter=self.urlquote(parameter), )
-        
-        return self.connection.DELETE(endpoint=_api_endpoint)
 
     def get_all_policies(self):
         '''A list of all policies'''
@@ -606,6 +606,22 @@ class Client(object):
         
         return self.connection.GET(endpoint=_api_endpoint)
 
+    def delete_policy(self, vhost, policy):
+        '''An individual policy'''
+        
+
+        _api_endpoint = "api/policies/{vhost}/{policy}".format(vhost=self.urlquote(vhost), policy=self.urlquote(policy), )
+        
+        return self.connection.DELETE(endpoint=_api_endpoint)
+
+    def get_policy(self, vhost, policy):
+        '''An individual policy'''
+        
+
+        _api_endpoint = "api/policies/{vhost}/{policy}".format(vhost=self.urlquote(vhost), policy=self.urlquote(policy), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def put_policy(self, vhost, policy, pattern, definition):
         '''An individual policy'''
         
@@ -616,22 +632,6 @@ class Client(object):
         _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
-
-    def get_policy(self, vhost, policy):
-        '''An individual policy'''
-        
-
-        _api_endpoint = "api/policies/{vhost}/{policy}".format(vhost=self.urlquote(vhost), policy=self.urlquote(policy), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
-    def delete_policy(self, vhost, policy):
-        '''An individual policy'''
-        
-
-        _api_endpoint = "api/policies/{vhost}/{policy}".format(vhost=self.urlquote(vhost), policy=self.urlquote(policy), )
-        
-        return self.connection.DELETE(endpoint=_api_endpoint)
 
     def get_aliveness_test(self, vhost = '/'):
         '''Declares a test queue, then publishes and consumes a message'''
