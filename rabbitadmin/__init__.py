@@ -36,6 +36,14 @@ class Client(object):
         
         return self.connection.GET(endpoint=_api_endpoint)
 
+    def get_cluster_name(self):
+        '''Name identifying this RabbitMQ cluster'''
+        
+
+        _api_endpoint = "api/cluster-name"
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def put_cluster_name(self, name):
         '''Name identifying this RabbitMQ cluster'''
         
@@ -46,14 +54,6 @@ class Client(object):
         _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
-
-    def get_cluster_name(self):
-        '''Name identifying this RabbitMQ cluster'''
-        
-
-        _api_endpoint = "api/cluster-name"
-        
-        return self.connection.GET(endpoint=_api_endpoint)
 
     def get_nodes(self):
         '''A list of nodes in the RabbitMQ cluster'''
@@ -175,6 +175,14 @@ class Client(object):
         
         return self.connection.GET(endpoint=_api_endpoint)
 
+    def get_exchange(self, vhost, exchange):
+        '''An individual exchange'''
+        
+
+        _api_endpoint = "api/exchanges/{vhost}/{exchange}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def put_exchange(self, vhost, exchange, type = 'direct'):
         '''An individual exchange'''
         
@@ -186,15 +194,7 @@ class Client(object):
         
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
-    def get_exchange(self, vhost, exchange):
-        '''An individual exchange'''
-        
-
-        _api_endpoint = "api/exchanges/{vhost}/{exchange}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
-    def delete_exchange(self, vhost, exchange,  = _NO_VALUE):
+    def delete_exchange(self, vhost, exchange, if_unused = _NO_VALUE):
         '''An individual exchange'''
         
         _all_query_args = { 'if-unused': if_unused,  }
@@ -252,6 +252,14 @@ class Client(object):
         
         return self.connection.GET(endpoint=_api_endpoint)
 
+    def get_queue(self, vhost, queue):
+        '''An individual queue'''
+        
+
+        _api_endpoint = "api/queues/{vhost}/{queue}".format(vhost=self.urlquote(vhost), queue=self.urlquote(queue), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def put_queue(self, vhost, queue):
         '''An individual queue'''
         
@@ -263,15 +271,7 @@ class Client(object):
         
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
-    def get_queue(self, vhost, queue):
-        '''An individual queue'''
-        
-
-        _api_endpoint = "api/queues/{vhost}/{queue}".format(vhost=self.urlquote(vhost), queue=self.urlquote(queue), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
-
-    def delete_queue(self, vhost, queue,  = _NO_VALUE,  = _NO_VALUE):
+    def delete_queue(self, vhost, queue, if_empty = _NO_VALUE, if_unused = _NO_VALUE):
         '''An individual queue'''
         
         _all_query_args = { 'if-empty': if_empty, 'if-unused': if_unused,  }
@@ -340,6 +340,14 @@ class Client(object):
         
         return self.connection.GET(endpoint=_api_endpoint)
 
+    def get_bindings_by_queue(self, vhost, exchange, queue):
+        '''A list of all bindings between an exchange and a queue'''
+        
+
+        _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def post_bindings_by_queue(self, vhost, exchange, queue):
         '''A list of all bindings between an exchange and a queue'''
         
@@ -350,14 +358,6 @@ class Client(object):
         _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
-
-    def get_bindings_by_queue(self, vhost, exchange, queue):
-        '''A list of all bindings between an exchange and a queue'''
-        
-
-        _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
 
     def get_binding_by_queue(self, vhost, exchange, queue, props):
         '''An individual binding between an exchange and a queue'''
@@ -375,6 +375,14 @@ class Client(object):
         
         return self.connection.DELETE(endpoint=_api_endpoint)
 
+    def get_bindings_between_exchanges(self, vhost, source, destination):
+        '''A list of all bindings between two exchanges'''
+        
+
+        _api_endpoint = "api/bindings/{vhost}/e/{source}/e/{destination}".format(vhost=self.urlquote(vhost), source=self.urlquote(source), destination=self.urlquote(destination), )
+        
+        return self.connection.GET(endpoint=_api_endpoint)
+
     def post_bindings_between_exchanges(self, vhost, source, destination):
         '''A list of all bindings between two exchanges'''
         
@@ -385,14 +393,6 @@ class Client(object):
         _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
-
-    def get_bindings_between_exchanges(self, vhost, source, destination):
-        '''A list of all bindings between two exchanges'''
-        
-
-        _api_endpoint = "api/bindings/{vhost}/e/{source}/e/{destination}".format(vhost=self.urlquote(vhost), source=self.urlquote(source), destination=self.urlquote(destination), )
-        
-        return self.connection.GET(endpoint=_api_endpoint)
 
     def get_binding_between_exchanges(self, vhost, source, destination, props):
         '''An individual binding between two exchanges'''
