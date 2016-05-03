@@ -1,10 +1,10 @@
 
 .PHONY : all
 
-all: rabbitadmin/__init__.py
+all: rabbitadmin/client.py
 
-rabbitadmin/__init__.py: api.json
-	makerestapiclient -I 'from . import http' -i api.json -C --indent '    ' -d http.HTTP -p api/ > rabbitadmin/__init__.py
+rabbitadmin/client.py: api.json
+	makerestapiclient -I 'from . import http' -i api.json -C --indent '    ' -d http.HTTP -p api/ > rabbitadmin/client.py
 
 clean:
-	-rm rabbitadmin/__init__.py
+	-rm rabbitadmin/client.py
