@@ -40,7 +40,7 @@ class Client(object):
         _api_endpoint = "api/cluster-name"
 
         _all_data_args = { 'name': name,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
@@ -178,7 +178,7 @@ class Client(object):
         _api_endpoint = "api/exchanges/{vhost}/{exchange}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), )
 
         _all_data_args = { 'type': type, 'auto_delete': auto_delete, 'durable': durable, 'internal': internal, 'arguments': arguments,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
@@ -202,7 +202,7 @@ class Client(object):
         _api_endpoint = "api/exchanges/{vhost}/{exchange}/publish".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), )
 
         _all_data_args = { 'properties': properties, 'routing_key': routing_key, 'payload': payload, 'payload_encoding': payload_encoding,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
 
@@ -252,7 +252,7 @@ class Client(object):
         _api_endpoint = "api/queues/{vhost}/{queue}".format(vhost=self.urlquote(vhost), queue=self.urlquote(queue), )
 
         _all_data_args = { 'auto_delete': auto_delete, 'durable': durable, 'arguments': arguments, 'node': node,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
@@ -292,7 +292,7 @@ class Client(object):
         _api_endpoint = "api/queues/{vhost}/{queue}/actions".format(vhost=self.urlquote(vhost), queue=self.urlquote(queue), )
 
         _all_data_args = { 'action': action,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
 
@@ -302,7 +302,7 @@ class Client(object):
         _api_endpoint = "api/queues/{vhost}/{queue}/get".format(vhost=self.urlquote(vhost), queue=self.urlquote(queue), )
 
         _all_data_args = { 'count': count, 'requeue': requeue, 'encoding': encoding, 'truncate': truncate,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
 
@@ -336,7 +336,7 @@ class Client(object):
         _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue), )
 
         _all_data_args = { 'routing_key': routing_key, 'arguments': arguments,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
 
@@ -370,7 +370,7 @@ class Client(object):
         _api_endpoint = "api/bindings/{vhost}/e/{source}/e/{destination}".format(vhost=self.urlquote(vhost), source=self.urlquote(source), destination=self.urlquote(destination), )
 
         _all_data_args = { 'routing_key': routing_key, 'arguments': arguments,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
 
@@ -420,7 +420,7 @@ class Client(object):
         _api_endpoint = "api/vhosts/{vhost}".format(vhost=self.urlquote(vhost), )
 
         _all_data_args = { 'tracing': tracing,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
@@ -462,7 +462,7 @@ class Client(object):
         _api_endpoint = "api/users/{user}".format(user=self.urlquote(user), )
 
         _all_data_args = { 'tags': tags, 'password': password, 'password_hash': password_hash,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
@@ -512,7 +512,7 @@ class Client(object):
         _api_endpoint = "api/permissions/{vhost}/{user}".format(vhost=self.urlquote(vhost), user=self.urlquote(user), )
 
         _all_data_args = { 'configure': configure, 'write': write, 'read': read,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
@@ -562,7 +562,7 @@ class Client(object):
         _api_endpoint = "api/parameters/{component}/{vhost}/{parameter}".format(component=self.urlquote(component), vhost=self.urlquote(vhost), parameter=self.urlquote(parameter), )
 
         _all_data_args = { 'vhost': vhost, 'component': component, 'name': name, 'value': value,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
@@ -604,7 +604,7 @@ class Client(object):
         _api_endpoint = "api/policies/{vhost}/{policy}".format(vhost=self.urlquote(vhost), policy=self.urlquote(policy), )
 
         _all_data_args = { 'pattern': pattern, 'definition': definition, 'priority': priority, 'apply-to': apply_to,  }
-        _data_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
+        _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
