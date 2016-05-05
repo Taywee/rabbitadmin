@@ -101,7 +101,8 @@
 		"name": "exchange",
 		"endpoint": "exchanges/{vhost}/{exchange}/publish",
 		"methods": ["POST"],
-		"data-args": ["properties", "routing_key", "payload", "payload_encoding"]
+		"data-args": ["payload", "routing_key", "properties", "payload_encoding"],
+    "defaults": {"routing_key": "", "properties": {}, "payload_encoding": "string"}
 	},
 	{
 		"description": "A list of all bindings in which a given exchange is the source",
@@ -181,8 +182,13 @@
 	{
 		"description": "A list of all bindings between an exchange and a queue",
 		"name": "bindings-by-queue",
+		"endpoint": "bindings/{vhost}/e/{exchange}/q/{queue}"
+	},
+	{
+		"description": "Create a queue binding.",
+		"name": "binding-by-queue",
 		"endpoint": "bindings/{vhost}/e/{exchange}/q/{queue}",
-		"methods": ["GET", "POST"],
+		"methods": ["POST"],
 		"data-options": ["routing_key", "arguments"]
 	},
 	{
@@ -194,8 +200,13 @@
 	{
 		"description": "A list of all bindings between two exchanges",
 		"name": "bindings-between-exchanges",
+		"endpoint": "bindings/{vhost}/e/{source}/e/{destination}"
+	},
+	{
+		"description": "Create a binding between two exchanges.",
+		"name": "binding-between-exchanges",
 		"endpoint": "bindings/{vhost}/e/{source}/e/{destination}",
-		"methods": ["GET", "POST"],
+		"methods": ["POST"],
 		"data-options": ["routing_key", "arguments"]
 	},
 	{

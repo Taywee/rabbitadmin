@@ -178,12 +178,12 @@ class Client(object):
 
         return self.connection.DELETE(endpoint=_api_endpoint)
 
-    def post_exchange(self, vhost, exchange, properties, routing_key, payload, payload_encoding):
+    def post_exchange(self, vhost, exchange, payload, routing_key='', properties={}, payload_encoding='string'):
         '''Publish a message to a given exchange'''
 
         _api_endpoint = "api/exchanges/{vhost}/{exchange}/publish".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange))
 
-        _all_data_args = {'properties': properties, 'routing_key': routing_key, 'payload': payload, 'payload_encoding': payload_encoding}
+        _all_data_args = {'payload': payload, 'routing_key': routing_key, 'properties': properties, 'payload_encoding': payload_encoding}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
@@ -302,8 +302,8 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def post_bindings_by_queue(self, vhost, exchange, queue, routing_key=_NO_VALUE, arguments=_NO_VALUE):
-        '''A list of all bindings between an exchange and a queue'''
+    def post_binding_by_queue(self, vhost, exchange, queue, routing_key=_NO_VALUE, arguments=_NO_VALUE):
+        '''Create a queue binding.'''
 
         _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue))
 
@@ -333,8 +333,8 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def post_bindings_between_exchanges(self, vhost, source, destination, routing_key=_NO_VALUE, arguments=_NO_VALUE):
-        '''A list of all bindings between two exchanges'''
+    def post_binding_between_exchanges(self, vhost, source, destination, routing_key=_NO_VALUE, arguments=_NO_VALUE):
+        '''Create a binding between two exchanges.'''
 
         _api_endpoint = "api/bindings/{vhost}/e/{source}/e/{destination}".format(vhost=self.urlquote(vhost), source=self.urlquote(source), destination=self.urlquote(destination))
 

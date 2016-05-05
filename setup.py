@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-version = '1.0.15'
+version = '1.1.0'
 
 setup(name='rabbitadmin',
     version=version,
