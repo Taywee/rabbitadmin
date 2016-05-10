@@ -3,7 +3,7 @@
 # Copyright © 2016 Taylor C. Richberger <taywee@gmx.com>
 # This code is released under the license described in the LICENSE file
 
-from urllib.parse import urlparse, urlunparse, quote_plus, urlencode
+from urllib.parse import urlparse, urlunparse, quote, urlencode
 from urllib.request import Request, HTTPPasswordMgrWithDefaultRealm, HTTPBasicAuthHandler, build_opener
 import json
 
@@ -18,7 +18,7 @@ def makerequest(opener, request):
 class HTTP(object):
     @staticmethod
     def urlquote(string):
-        return quote_plus(string)
+        return quote(string, safe='')
 
     @staticmethod
     def queryencode(query):
@@ -50,10 +50,16 @@ class HTTP(object):
         request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), method='DELETE', headers={'Content-Type': 'application/json'})
         return makerequest(self.opener, request)
 
-    def PUT(self, endpoint, data):
+    def PUT(self, endpoint, data=None):
+        if data is None:
+            data = dict()
+
         request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), data=bytes(json.dumps(data), 'utf-8'), method='PUT', headers={'Content-Type': 'application/json'})
         return makerequest(self.opener, request)
 
-    def POST(self, endpoint, data):
+    def POST(self, endpoint, data=None):
+        if data is None:
+            data = dict()
+
         request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), data=bytes(json.dumps(data), 'utf-8'), method='POST', headers={'Content-Type': 'application/json'})
         return makerequest(self.opener, request)
