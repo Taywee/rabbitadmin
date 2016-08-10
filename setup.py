@@ -2,7 +2,7 @@
 
 from setuptools import setup
 
-version = '1.2.0'
+version = '1.2.1'
 
 setup(name='rabbitadmin',
     version=version,
@@ -32,6 +32,8 @@ https://cdn.rawgit.com/rabbitmq/rabbitmq-management/rabbitmq_v3_6_1/priv/www/api
     download_url='https://github.com/Taywee/rabbitadmin',
     license='MIT',
     packages=['rabbitadmin'],
-    include_package_data=False,
-    zip_safe=False,
+    install_requires=[
+        'six',
+        'requests',
+        ]
     )

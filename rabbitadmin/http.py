@@ -1,19 +1,21 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright © 2016 Taylor C. Richberger <taywee@gmx.com>
 # This code is released under the license described in the LICENSE file
 
-from urllib.parse import urlparse, urlunparse, quote, urlencode
-from urllib.request import Request, HTTPPasswordMgrWithDefaultRealm, HTTPBasicAuthHandler, build_opener
-import json
+from __future__ import absolute_import, division, print_function, unicode_literals
 
-def makerequest(opener, request):
-    with opener.open(request) as response:
-        body = response.read()
-        if body:
-            return json.loads(str(body, 'utf-8'))
-        else:
-            return None
+from six.moves.urllib.parse import urlparse, urlunparse, quote, urlencode
+from six.moves.urllib.request import Request, HTTPPasswordMgrWithDefaultRealm, HTTPBasicAuthHandler, build_opener
+
+import requests
+from requests.auth import HTTPBasicAuth
+
+def makeresponse(data):
+    if data.text:
+        return data.json()
+    else:
+        return None
 
 class HTTP(object):
     @staticmethod
@@ -27,14 +29,7 @@ class HTTP(object):
     def __init__(self, scheme, host, port, username, password):
         self.scheme = scheme
         self.host = ':'.join((host, str(port)))
-
-        auth = HTTPBasicAuthHandler(HTTPPasswordMgrWithDefaultRealm())
-        auth.add_password(
-            realm=None,
-            uri=urlunparse((scheme, self.host, '', '', '', '')),
-            user=username,
-            passwd=password)
-        self.opener = build_opener(auth)
+        self.auth = HTTPBasicAuth(username, password)
 
     def __enter__(self):
         return self
@@ -43,23 +38,27 @@ class HTTP(object):
         pass
 
     def GET(self, endpoint):
-        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), method='GET', headers={'Content-Type': 'application/json'})
-        return makerequest(self.opener, request)
+        response = requests.get(urlunparse((self.scheme, self.host, endpoint, '', '', '')), headers={'Content-Type': 'application/json'}, auth=self.auth)
+        response.raise_for_status()
+        return makeresponse(response)
 
     def DELETE(self, endpoint):
-        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), method='DELETE', headers={'Content-Type': 'application/json'})
-        return makerequest(self.opener, request)
+        response = requests.delete(urlunparse((self.scheme, self.host, endpoint, '', '', '')), headers={'Content-Type': 'application/json'}, auth=self.auth)
+        response.raise_for_status()
+        return makeresponse(response)
 
     def PUT(self, endpoint, data=None):
         if data is None:
             data = dict()
 
-        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), data=bytes(json.dumps(data), 'utf-8'), method='PUT', headers={'Content-Type': 'application/json'})
-        return makerequest(self.opener, request)
+        response = requests.put(urlunparse((self.scheme, self.host, endpoint, '', '', '')), headers={'Content-Type': 'application/json'}, json=data, auth=self.auth)
+        response.raise_for_status()
+        return makeresponse(response)
 
     def POST(self, endpoint, data=None):
         if data is None:
             data = dict()
 
-        request = Request(url=urlunparse((self.scheme, self.host, endpoint, '', '', '')), data=bytes(json.dumps(data), 'utf-8'), method='POST', headers={'Content-Type': 'application/json'})
-        return makerequest(self.opener, request)
+        response = requests.post(urlunparse((self.scheme, self.host, endpoint, '', '', '')), headers={'Content-Type': 'application/json'}, json=data, auth=self.auth)
+        response.raise_for_status()
+        return makeresponse(response)

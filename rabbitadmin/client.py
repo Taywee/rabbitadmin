@@ -37,7 +37,7 @@ class Client(object):
 
         _api_endpoint = "api/cluster-name"
 
-        _all_data_args = {'name': name}
+        _all_data_args = {u'name': name}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
@@ -140,7 +140,7 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def get_exchanges(self, vhost='/'):
+    def get_exchanges(self, vhost=u'/'):
         '''A list of all exchanges in a given virtual host'''
 
         _api_endpoint = "api/exchanges/{vhost}".format(vhost=self.urlquote(vhost))
@@ -154,12 +154,12 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def put_exchange(self, vhost, exchange, type='direct', auto_delete=_NO_VALUE, durable=_NO_VALUE, internal=_NO_VALUE, arguments=_NO_VALUE):
+    def put_exchange(self, vhost, exchange, type=u'direct', auto_delete=_NO_VALUE, durable=_NO_VALUE, internal=_NO_VALUE, arguments=_NO_VALUE):
         '''An individual exchange'''
 
         _api_endpoint = "api/exchanges/{vhost}/{exchange}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange))
 
-        _all_data_args = {'type': type, 'auto_delete': auto_delete, 'durable': durable, 'internal': internal, 'arguments': arguments}
+        _all_data_args = {u'type': type, u'auto_delete': auto_delete, u'durable': durable, u'internal': internal, u'arguments': arguments}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
@@ -167,7 +167,7 @@ class Client(object):
     def delete_exchange(self, vhost, exchange, if_unused=_NO_VALUE):
         '''An individual exchange'''
 
-        _all_query_args = {'if-unused': if_unused}
+        _all_query_args = {u'if-unused': if_unused}
         _query_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         if _query_args:
             _query_string = "?" + self.queryencode(_query_args)
@@ -178,12 +178,12 @@ class Client(object):
 
         return self.connection.DELETE(endpoint=_api_endpoint)
 
-    def post_exchange(self, vhost, exchange, payload, routing_key='', properties={}, payload_encoding='string'):
+    def post_exchange(self, vhost, exchange, payload, routing_key=u'', properties={}, payload_encoding=u'string'):
         '''Publish a message to a given exchange'''
 
         _api_endpoint = "api/exchanges/{vhost}/{exchange}/publish".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange))
 
-        _all_data_args = {'payload': payload, 'routing_key': routing_key, 'properties': properties, 'payload_encoding': payload_encoding}
+        _all_data_args = {u'payload': payload, u'routing_key': routing_key, u'properties': properties, u'payload_encoding': payload_encoding}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
@@ -209,7 +209,7 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def get_queues(self, vhost='/'):
+    def get_queues(self, vhost=u'/'):
         '''A list of all queues in a given virtual host'''
 
         _api_endpoint = "api/queues/{vhost}".format(vhost=self.urlquote(vhost))
@@ -228,7 +228,7 @@ class Client(object):
 
         _api_endpoint = "api/queues/{vhost}/{queue}".format(vhost=self.urlquote(vhost), queue=self.urlquote(queue))
 
-        _all_data_args = {'auto_delete': auto_delete, 'durable': durable, 'arguments': arguments, 'node': node}
+        _all_data_args = {u'auto_delete': auto_delete, u'durable': durable, u'arguments': arguments, u'node': node}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
@@ -236,7 +236,7 @@ class Client(object):
     def delete_queue(self, vhost, queue, if_empty=_NO_VALUE, if_unused=_NO_VALUE):
         '''An individual queue'''
 
-        _all_query_args = {'if-empty': if_empty, 'if-unused': if_unused}
+        _all_query_args = {u'if-empty': if_empty, u'if-unused': if_unused}
         _query_args = {k: v for k, v in _all_query_args.items() if v != self._NO_VALUE}
         if _query_args:
             _query_string = "?" + self.queryencode(_query_args)
@@ -261,22 +261,22 @@ class Client(object):
 
         return self.connection.DELETE(endpoint=_api_endpoint)
 
-    def post_queue_action(self, vhost, queue, action='sync'):
+    def post_queue_action(self, vhost, queue, action=u'sync'):
         '''Actions that can be taken on a queue'''
 
         _api_endpoint = "api/queues/{vhost}/{queue}/actions".format(vhost=self.urlquote(vhost), queue=self.urlquote(queue))
 
-        _all_data_args = {'action': action}
+        _all_data_args = {u'action': action}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
 
-    def post_queue_get(self, vhost, queue, count=1, requeue=True, encoding='auto', truncate=_NO_VALUE):
+    def post_queue_get(self, vhost, queue, count=1, requeue=True, encoding=u'auto', truncate=_NO_VALUE):
         '''Get messages from a queue'''
 
         _api_endpoint = "api/queues/{vhost}/{queue}/get".format(vhost=self.urlquote(vhost), queue=self.urlquote(queue))
 
-        _all_data_args = {'count': count, 'requeue': requeue, 'encoding': encoding, 'truncate': truncate}
+        _all_data_args = {u'count': count, u'requeue': requeue, u'encoding': encoding, u'truncate': truncate}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
@@ -288,7 +288,7 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def get_bindings(self, vhost='/'):
+    def get_bindings(self, vhost=u'/'):
         '''A list of all bindings in a given virtual host'''
 
         _api_endpoint = "api/bindings/{vhost}".format(vhost=self.urlquote(vhost))
@@ -307,7 +307,7 @@ class Client(object):
 
         _api_endpoint = "api/bindings/{vhost}/e/{exchange}/q/{queue}".format(vhost=self.urlquote(vhost), exchange=self.urlquote(exchange), queue=self.urlquote(queue))
 
-        _all_data_args = {'routing_key': routing_key, 'arguments': arguments}
+        _all_data_args = {u'routing_key': routing_key, u'arguments': arguments}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
@@ -338,7 +338,7 @@ class Client(object):
 
         _api_endpoint = "api/bindings/{vhost}/e/{source}/e/{destination}".format(vhost=self.urlquote(vhost), source=self.urlquote(source), destination=self.urlquote(destination))
 
-        _all_data_args = {'routing_key': routing_key, 'arguments': arguments}
+        _all_data_args = {u'routing_key': routing_key, u'arguments': arguments}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.POST(endpoint=_api_endpoint, data=_data_args)
@@ -364,31 +364,31 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def delete_vhost(self, vhost='/'):
+    def delete_vhost(self, vhost=u'/'):
         '''An individual virtual host'''
 
         _api_endpoint = "api/vhosts/{vhost}".format(vhost=self.urlquote(vhost))
 
         return self.connection.DELETE(endpoint=_api_endpoint)
 
-    def get_vhost(self, vhost='/'):
+    def get_vhost(self, vhost=u'/'):
         '''An individual virtual host'''
 
         _api_endpoint = "api/vhosts/{vhost}".format(vhost=self.urlquote(vhost))
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def put_vhost(self, vhost='/', tracing=_NO_VALUE):
+    def put_vhost(self, vhost=u'/', tracing=_NO_VALUE):
         '''An individual virtual host'''
 
         _api_endpoint = "api/vhosts/{vhost}".format(vhost=self.urlquote(vhost))
 
-        _all_data_args = {'tracing': tracing}
+        _all_data_args = {u'tracing': tracing}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
-    def get_vhost_permissions(self, vhost='/'):
+    def get_vhost_permissions(self, vhost=u'/'):
         '''A list of all permissions for a given virtual host'''
 
         _api_endpoint = "api/vhosts/{vhost}/permissions".format(vhost=self.urlquote(vhost))
@@ -416,12 +416,12 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def put_user(self, user, tags='', password=_NO_VALUE, password_hash=_NO_VALUE):
+    def put_user(self, user, tags=u'', password=_NO_VALUE, password_hash=_NO_VALUE):
         '''An individual user'''
 
         _api_endpoint = "api/users/{user}".format(user=self.urlquote(user))
 
-        _all_data_args = {'tags': tags, 'password': password, 'password_hash': password_hash}
+        _all_data_args = {u'tags': tags, u'password': password, u'password_hash': password_hash}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
@@ -466,7 +466,7 @@ class Client(object):
 
         _api_endpoint = "api/permissions/{vhost}/{user}".format(vhost=self.urlquote(vhost), user=self.urlquote(user))
 
-        _all_data_args = {'configure': configure, 'write': write, 'read': read}
+        _all_data_args = {u'configure': configure, u'write': write, u'read': read}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
@@ -485,7 +485,7 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def get_vhost_component_parameters(self, component, vhost='/'):
+    def get_vhost_component_parameters(self, component, vhost=u'/'):
         '''A list of all parameters for a given component and virtual host'''
 
         _api_endpoint = "api/parameters/{component}/{vhost}".format(component=self.urlquote(component), vhost=self.urlquote(vhost))
@@ -511,7 +511,7 @@ class Client(object):
 
         _api_endpoint = "api/parameters/{component}/{vhost}/{parameter}".format(component=self.urlquote(component), vhost=self.urlquote(vhost), parameter=self.urlquote(parameter))
 
-        _all_data_args = {'vhost': vhost, 'component': component, 'name': name, 'value': value}
+        _all_data_args = {u'vhost': vhost, u'component': component, u'name': name, u'value': value}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
@@ -523,7 +523,7 @@ class Client(object):
 
         return self.connection.GET(endpoint=_api_endpoint)
 
-    def get_policies(self, vhost='/'):
+    def get_policies(self, vhost=u'/'):
         '''A list of all policies in a given virtual host'''
 
         _api_endpoint = "api/policies/{vhost}".format(vhost=self.urlquote(vhost))
@@ -549,12 +549,12 @@ class Client(object):
 
         _api_endpoint = "api/policies/{vhost}/{policy}".format(vhost=self.urlquote(vhost), policy=self.urlquote(policy))
 
-        _all_data_args = {'pattern': pattern, 'definition': definition, 'priority': priority, 'apply-to': apply_to}
+        _all_data_args = {u'pattern': pattern, u'definition': definition, u'priority': priority, u'apply-to': apply_to}
         _data_args = {k: v for k, v in _all_data_args.items() if v != self._NO_VALUE}
 
         return self.connection.PUT(endpoint=_api_endpoint, data=_data_args)
 
-    def get_aliveness_test(self, vhost='/'):
+    def get_aliveness_test(self, vhost=u'/'):
         '''Declares a test queue, then publishes and consumes a message'''
 
         _api_endpoint = "api/aliveness-test/{vhost}".format(vhost=self.urlquote(vhost))

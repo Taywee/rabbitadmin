@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright © 2016 Absolute Performance Inc <csteam@absolute-performance.com>.
 # All rights reserved.
@@ -8,7 +8,8 @@
 import unittest
 import tempfile
 from rabbitadmin import Client as Rabbit
-from urllib.error import HTTPError
+import six
+from requests import HTTPError
 
 class RabbitTest(unittest.TestCase):
     def setUp(self):
@@ -28,20 +29,20 @@ class RabbitTest(unittest.TestCase):
         with self.rabbit as rabbit:
             user = {'username': 'testuser', 'password': 'testpass'}
             # User does not yet exist
-            with self.assertRaisesRegex(HTTPError, 'Unauthorized'):
+            with six.assertRaisesRegex(self, HTTPError, 'Unauthorized'):
                 Rabbit(scheme='http', host='localhost', port=15672, **user).get_aliveness_test(vhost=self.vhost)
 
             rabbit.put_user(user=user['username'], password=user['password'], tags='monitoring')
 
             # User doesn't have permissions on the vhost
-            with self.assertRaisesRegex(HTTPError, 'Unauthorized'):
+            with six.assertRaisesRegex(self, HTTPError, 'Unauthorized'):
                 Rabbit(scheme='http', host='localhost', port=15672, **user).get_aliveness_test(vhost=self.vhost)
 
             # User needs permissions to create and destroy the test queue
             rabbit.put_user_vhost_permissions(vhost=self.vhost, user=user['username'], configure='^.*$', write='^.*$', read='^.*$')
 
             # User needs the right password
-            with self.assertRaisesRegex(HTTPError, 'Unauthorized'):
+            with six.assertRaisesRegex(self, HTTPError, 'Unauthorized'):
                 Rabbit(scheme='http', host='localhost', port=15672, username=user['username'], password='wrongpassword').get_aliveness_test(vhost=self.vhost)
 
             # This should work
